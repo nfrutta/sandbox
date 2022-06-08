@@ -17,18 +17,13 @@ class FirstPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // TextButton(
-            //   onPressed: () {},
-            //   child: const Text('TextButton'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   child: const Text('ElevatedButton'),
-            // ),
-            // OutlinedButton(
-            //   onPressed: () {},
-            //   child: const Text('ElevatedButton'),
-            // ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Image.network(
+                height: 200,
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48.0),
               child: TextField(
@@ -41,7 +36,7 @@ class FirstPage extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

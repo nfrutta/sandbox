@@ -16,12 +16,16 @@ class SecondPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Image.asset('images/yuzu.jpeg'),
+            ),
             Text(
               name,
               style: const TextStyle(fontSize: 50),
             ),
             const SizedBox(
-              height: 100,
+              height: 32,
             ),
             ElevatedButton(
               onPressed: () {
