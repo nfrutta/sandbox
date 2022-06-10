@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sandbox/first_page.dart';
+import 'package:sandbox/enable_hotreload_dialog.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FirstPage(),
-    );
+    return const MaterialApp(home: EnableHotreloadDialog());
   }
 }
