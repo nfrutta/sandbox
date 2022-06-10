@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sandbox/enable_hotreload_dialog.dart';
+
+import 'statefulwidget_sample.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,6 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: EnableHotreloadDialog());
+    return const MaterialApp(home: StatefulwidgetSample());
   }
 }
