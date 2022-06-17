@@ -42,8 +42,7 @@ class _PixabayPageState extends State<PixabayPage> {
   @override
   void initState() {
     super.initState();
-
-    fetchImages('花');
+    fetchImages('猫');
   }
 
   @override
@@ -61,57 +60,60 @@ class _PixabayPageState extends State<PixabayPage> {
           },
         ),
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemCount: imageList.length,
-        itemBuilder: (context, index) {
-          Map<String, dynamic> image = imageList[index];
-          return InkWell(
-            onTap: () async {
-              Directory dir = await getTemporaryDirectory();
-              Response response = await Dio().get(
-                image['webformatURL'],
-                options: Options(
-                  responseType: ResponseType.bytes,
-                ),
-              );
+      body: imageList == []
+          ? const CircularProgressIndicator()
+          : GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: imageList.length,
+              itemBuilder: (context, index) {
+                Map<String, dynamic> image = imageList[index];
+                return InkWell(
+                  onTap: () async {
+                    Directory dir = await getTemporaryDirectory();
+                    Response response = await Dio().get(
+                      image['webformatURL'],
+                      options: Options(
+                        responseType: ResponseType.bytes,
+                      ),
+                    );
 
-              File imageFile = await File('${dir.path}/image.png')
-                  .writeAsBytes(response.data);
+                    File imageFile = await File('${dir.path}/image.png')
+                        .writeAsBytes(response.data);
 
-              await Share.shareFiles([imageFile.path]);
-            },
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.network(
-                  image['previewURL'],
-                  fit: BoxFit.cover,
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.thumb_up_alt_outlined,
-                          size: 14,
+                    await Share.shareFiles([imageFile.path]);
+                  },
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        image['previewURL'],
+                        fit: BoxFit.cover,
+                        isAntiAlias: true,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.thumb_up_alt_outlined,
+                                size: 14,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(image['likes'].toString()),
+                            ],
+                          ),
                         ),
-                        const SizedBox(width: 4),
-                        Text(image['likes'].toString()),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
