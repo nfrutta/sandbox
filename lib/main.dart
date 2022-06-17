@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'janken.dart';
+import 'package:sandbox/pixabay.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const Janken());
+  runApp(const Pixabay());
 }
